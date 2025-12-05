@@ -3,34 +3,27 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: 20  # Uyarıları gidermek için Node sürümünü güncelleyin
+      nodejs: 20
     commands:
-      - echo "Eski node_modules temizleniyor..."
+      - echo "Temiz kurulum yapılıyor..."
       - rm -rf node_modules
-      - rm -f package-lock.json # Opsiyonel: Bazen lock dosyası da sorun yaratabilir
-      - echo "Bağımlılıklar sıfırdan kuruluyor..."
-      - npm install  # veya 'npm ci' (eğer package-lock.json dosyanız sağlamsa)
-  pre_build:
-    commands:
-      - echo "Testler çalıştırılıyor..."
-      # npx kullanarak izin sorunlarını aşın
-      - npx jest
+      - npm install
 
   pre_build:
     commands:
-      - echo Running unit and integration tests...
+      - echo "Testler çalıştırılıyor..."
       - npm test
 
   build:
     commands:
-      - echo Building application artifact...
+      - echo "Build klasörü oluşturuluyor..."
       - mkdir -p build
-      - cp -r app.js server.js utils.js package.json node_modules build/
+      - cp -r . build/
 
   post_build:
     commands:
-      - echo Packaging application...
-      - zip -r marketforge-artifact.zip build
+      - echo "Zip paketi hazırlanıyor..."
+      - zip -r marketforge-artifact.zip build appspec.yml scripts/
 
 artifacts:
   files:
