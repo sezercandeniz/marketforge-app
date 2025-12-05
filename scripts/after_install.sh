@@ -1,13 +1,14 @@
 #!/bin/bash
 set -e
 
-echo ">>> Switching to project folder"
+sudo chown -R ubuntu:ubuntu /home/ubuntu/marketforge
 cd /home/ubuntu/marketforge
 
-echo ">>> Fixing ownership"
-sudo chown -R ubuntu:ubuntu /home/ubuntu/marketforge
+# Node modules temizle
+rm -rf node_modules
 
-echo ">>> Installing dependencies"
-npm install --unsafe-perm=true
+# NPM izinlerini düzelt (GLOBAL)
+sudo chown -R ubuntu:ubuntu ~/.npm
 
-echo ">>> After install step completed"
+# Uygulama bağımlılıklarını kur
+npm install --legacy-peer-deps
