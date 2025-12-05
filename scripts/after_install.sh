@@ -1,17 +1,14 @@
 #!/bin/bash
 set -e
 
-sudo chown -R ubuntu:ubuntu /home/ubuntu/marketforge
+# Sahiplik artık BeforeInstall'da ayarlandığı için bu satırları kaldırdık veya sadeleştirdik.
 cd /home/ubuntu/marketforge
 
 # Node modules temizle
 rm -rf node_modules
 
-# NPM izinlerini düzelt (GLOBAL)
-# Bu satır genellikle gereksizdir çünkü 'runas: ubuntu' kullanıyorsunuz
-# Yine de bırakabilirsiniz.
-sudo chown -R ubuntu:ubuntu ~/.npm
+# NPM global izinlerini düzelt (artık sudo'ya gerek yok)
+chown -R ubuntu:ubuntu /home/ubuntu/.npm
 
-# Uygulama bağımlılıklarını mutlak yol ile kur
-# HATA BURADAYDI: Sadece 'npm' yerine '/usr/bin/npm' kullanıyoruz
+# Uygulama bağımlılıklarını kur (Mutlak yolu kullanıyoruz)
 /usr/bin/npm install --legacy-peer-deps
