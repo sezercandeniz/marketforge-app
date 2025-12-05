@@ -1,4 +1,4 @@
 #!/bin/bash
-echo "Starting server..."
 cd /home/ubuntu/marketforge
-nohup node server.js > app.log 2>&1 &
+echo "🚀 Starting app with PM2..."
+pm2 start server.js
