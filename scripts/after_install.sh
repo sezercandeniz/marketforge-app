@@ -1,4 +1,3 @@
 #!/bin/bash
 cd /home/ubuntu/marketforge
-echo "📦 Installing dependencies..."
-npm install
+npm install --omit=dev

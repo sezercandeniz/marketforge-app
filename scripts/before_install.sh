@@ -1,4 +1,4 @@
 #!/bin/bash
-echo "⏳ Stopping existing app (if any)..."
-pm2 stop all || true
+sudo systemctl stop marketforge || true
 rm -rf /home/ubuntu/marketforge
+mkdir -p /home/ubuntu/marketforge
