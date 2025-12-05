@@ -2,11 +2,19 @@ version: 0.2
 
 phases:
   install:
+    runtime-versions:
+      nodejs: 20  # Uyarıları gidermek için Node sürümünü güncelleyin
     commands:
-      - echo Running unit and integration tests...
-      # jest dosyasına çalıştırma izni ver
-      - chmod +x ./node_modules/.bin/jest
-      - npm test
+      - echo "Eski node_modules temizleniyor..."
+      - rm -rf node_modules
+      - rm -f package-lock.json # Opsiyonel: Bazen lock dosyası da sorun yaratabilir
+      - echo "Bağımlılıklar sıfırdan kuruluyor..."
+      - npm install  # veya 'npm ci' (eğer package-lock.json dosyanız sağlamsa)
+  pre_build:
+    commands:
+      - echo "Testler çalıştırılıyor..."
+      # npx kullanarak izin sorunlarını aşın
+      - npx jest
 
   pre_build:
     commands:
