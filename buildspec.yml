@@ -3,8 +3,10 @@ version: 0.2
 phases:
   install:
     commands:
-      - echo Installing dependencies...
-      - npm install
+      - echo Running unit and integration tests...
+      # jest dosyasına çalıştırma izni ver
+      - chmod +x ./node_modules/.bin/jest
+      - npm test
 
   pre_build:
     commands:
