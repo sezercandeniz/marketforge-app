@@ -1,0 +1,27 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo Installing dependencies...
+      - npm install
+
+  pre_build:
+    commands:
+      - echo Running unit and integration tests...
+      - npm test
+
+  build:
+    commands:
+      - echo Building application artifact...
+      - mkdir -p build
+      - cp -r app.js server.js utils.js package.json node_modules build/
+
+  post_build:
+    commands:
+      - echo Packaging application...
+      - zip -r marketforge-artifact.zip build
+
+artifacts:
+  files:
+    - marketforge-artifact.zip
