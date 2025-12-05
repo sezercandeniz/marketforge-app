@@ -8,3 +8,4 @@ describe("MarketForge API Integration Test", () => {
     expect(res.text).toBe("MarketForge API running!");
   });
 });
+
