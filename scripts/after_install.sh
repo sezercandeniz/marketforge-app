@@ -8,7 +8,10 @@ cd /home/ubuntu/marketforge
 rm -rf node_modules
 
 # NPM izinlerini düzelt (GLOBAL)
+# Bu satır genellikle gereksizdir çünkü 'runas: ubuntu' kullanıyorsunuz
+# Yine de bırakabilirsiniz.
 sudo chown -R ubuntu:ubuntu ~/.npm
 
-# Uygulama bağımlılıklarını kur
-npm install --legacy-peer-deps
+# Uygulama bağımlılıklarını mutlak yol ile kur
+# HATA BURADAYDI: Sadece 'npm' yerine '/usr/bin/npm' kullanıyoruz
+/usr/bin/npm install --legacy-peer-deps
