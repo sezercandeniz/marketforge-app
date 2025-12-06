@@ -14,16 +14,10 @@ phases:
 
   build:
     commands:
-      - mkdir -p build
-      - cp -r app.js server.js utils.js package.json node_modules build/
-      - cp appspec.yml build/
-      - cp -r scripts build/
-
-  post_build:
-    commands:
-      - cd build
-      - zip -r ../marketforge-artifact.zip .
+      - mkdir -p artifact
+      - cp -r app.js server.js utils.js package.json node_modules appspec.yml scripts artifact/
 
 artifacts:
+  base-directory: artifact
   files:
-    - marketforge-artifact.zip
+    - "**/*"
