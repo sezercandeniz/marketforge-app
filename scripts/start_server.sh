@@ -6,26 +6,25 @@ echo "🚀 Uygulama başlatılıyor..."
 APP_DIR="/home/ubuntu/marketforge"
 cd $APP_DIR
 
-# 🟢 NVM Ortamını Yükle 
+# 🟢 NVM'i yükle
 export NVM_DIR="/home/ubuntu/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" 
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
-# 💥 KRİTİK DÜZELTME: NPM çakışmasını temizle
-# Hata mesajında belirtilen işlemi yapar: .npmrc dosyasındaki prefix/globalconfig ayarını kaldırır.
-# "stable" yerine loglarda gördüğünüz v25.2.1 gibi bir sürüm de kullanabilirsiniz.
-nvm use --delete-prefix stable 
+# 🔧 NPM prefix/globalconfig hatasını düzelt
+nvm use --delete-prefix v25.2.1 --silent
 
-# Şimdi nvm use komutunu güvenle çalıştırın.
-nvm use stable 
+# 🔧 Node sürümünü aktif et
+nvm use v25.2.1
 
-echo "🔍 Mevcut node versiyonu:"
+echo "🔍 Node versiyonu:"
 node -v || echo "Node bulunamadı!"
 
-# Eğer çalışan server varsa kapat
+# 🛑 Eski çalışan server varsa kapat
 echo "🛑 Çalışan Node process kontrol ediliyor..."
 pkill -f "node server.js" || echo "Aktif process yok."
 
-echo "🌍 Server arka planda başlatılıyor..."
+# 🚀 Sunucuyu arka planda başlat
+echo "🌍 Server başlatılıyor..."
 nohup node server.js > app.log 2>&1 &
 
 echo "✅ ApplicationStart tamamlandı."
