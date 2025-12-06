@@ -23,7 +23,7 @@ phases:
   post_build:
     commands:
       - echo "Zip paketi hazırlanıyor..."
-      - zip -r marketforge-artifact.zip build appspec.yml scripts/
+      - zip -r ../marketforge-artifact.zip build appspec.yml scripts/
 
 artifacts:
   files:
