@@ -11,10 +11,11 @@ export NVM_DIR="/home/ubuntu/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" 
 
 # 💥 KRİTİK DÜZELTME: NPM çakışmasını temizle
-# nvm use komutundan önce çakışan global ayarları kaldır.
-# nvm'in doğru Node sürümünü alabilmesi için bu gereklidir.
+# Hata mesajında belirtilen komutu uygulayın.
+# Bu komut, .npmrc dosyasındaki prefix/globalconfig ayarını kaldırır.
 nvm use --delete-prefix stable 
 
+# Şimdi nvm use komutunu güvenle çalıştırın.
 nvm use stable 
 
 echo "🔍 Mevcut node versiyonu:"
