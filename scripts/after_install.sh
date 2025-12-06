@@ -7,20 +7,22 @@ cd $APP_DIR
 echo "📦 node_modules temizleniyor (SUDO ile)..."
 sudo rm -rf node_modules
 
-# 🟢 KRİTİK DÜZELTME: NVM Ortamını Sağlamlaştırma
-# Bu adımlar, nvm komutunun bulunmasını sağlar.
+# 🟢 KRİTİK DÜZELTME: NVM'i PATH'e Zorlama
 export NVM_DIR="/home/ubuntu/.nvm"
-
-# NVM yükleme betiğini source edin.
-# 'source' yerine '.' (nokta) kullanmak, CodeDeploy betikleri için daha güvenilir bir yöntemdir.
+# NVM'i PATH'e ekleyen betiği source edin.
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+# PATH'e NVM'in ana dizinini ekleyin, nvm komutunu bulabilmek için.
+export PATH="$NVM_DIR/versions/node/$(nvm version)/bin:$PATH"
 
 # NVM'i kullan
 nvm use stable 
 
-# 📦 Kurulumu SUDO ile yap (İzin hatalarını çözmek için)
+# 📦 Kurulumu SUDO ile yap
 echo "📦 npm install SUDO ile çalıştırılıyor..."
-sudo npm install --unsafe-perm
+# Node'un NVM tarafından belirlenen tam yolunu kullanarak SUDO'yu çalıştırın.
+# Bu, SUDO'nun PATH'i sıfırlamasını engeller.
+sudo $NVM_DIR/versions/node/$(nvm version)/bin/npm install --unsafe-perm
 
 # 🚨 Kurulum sonrası sahiplik geri alınıyor
 echo "🚨 Kurulum sonrası dosya sahipliği ubuntu'ya geri alınıyor..."
