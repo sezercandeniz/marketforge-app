@@ -1,4 +1,9 @@
 #!/bin/bash
-# Uygulama dizininin (ve içindeki her şeyin) sahipliğini ubuntu kullanıcısına ver.
-# Bu komut, appspec'te 'runas: root' olarak çalıştığı için başarılı olacaktır.
-sudo chown -R ubuntu:ubuntu /home/ubuntu/marketforge
+# Uygulama ve NPM önbellek dizinlerinin sahipliğini garanti altına al.
+
+# 1. Uygulama Dizinini Ayarla
+chown -R ubuntu:ubuntu /home/ubuntu/marketforge
+
+# 2. NPM önbellek dizinini ve NVM dizinini ayarla
+chown -R ubuntu:ubuntu /home/ubuntu/.npm
+chown -R ubuntu:ubuntu /home/ubuntu/.nvm

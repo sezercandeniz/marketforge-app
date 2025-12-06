@@ -4,19 +4,16 @@ APP_DIR="/home/ubuntu/marketforge"
 
 cd $APP_DIR
 
-# 🚨 DİKKAT: Sahiplik 'change_ownership.sh' içinde çözüldüyse bu satırı KALDIRIN
-# chown -R ubuntu:ubuntu $APP_DIR 
-
 echo "📦 node_modules temizleniyor..."
 rm -rf node_modules
 
-# 🟢 NVM Ortamını Yükle (Eğer Node.js'i NVM ile kurduysanız)
+# 🟢 NVM Ortamını Yükle (NPM yolunu doğru bulmak için kritik)
 export NVM_DIR="/home/ubuntu/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # nvm.sh'ı yükle
-nvm use stable # Veya kullandığınız node versiyonunu (örneğin nvm use 18)
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+nvm use stable # veya kullandığınız spesifik Node versiyonu (ör: nvm use 18)
 
-# 📦 npm install çalıştırılıyor (Artık --unsafe-perm bayrağına gerek yok)
+# 📦 npm install çalıştırılıyor - İzin hatalarını bypass etmek için --unsafe-perm eklendi
 echo "📦 npm install çalıştırılıyor..."
-npm install
+npm install --unsafe-perm
 
 echo "AfterInstall OK"
