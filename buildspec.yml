@@ -5,18 +5,15 @@ phases:
     runtime-versions:
       nodejs: 20
     commands:
-      - echo "Temiz kurulum yapılıyor..."
       - rm -rf node_modules
       - npm install
 
   pre_build:
     commands:
-      - echo "Testler çalıştırılıyor..."
       - npm test
 
   build:
     commands:
-      - echo "Build klasörü hazırlanıyor..."
       - mkdir -p build
       - cp -r app.js server.js utils.js package.json node_modules build/
       - cp appspec.yml build/
@@ -24,7 +21,6 @@ phases:
 
   post_build:
     commands:
-      - echo "Zip paketi hazırlanıyor..."
       - cd build
       - zip -r ../marketforge-artifact.zip .
 
