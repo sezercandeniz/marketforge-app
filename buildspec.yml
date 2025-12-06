@@ -16,14 +16,17 @@ phases:
 
   build:
     commands:
-      - echo "Build klasörü oluşturuluyor..."
+      - echo "Build klasörü hazırlanıyor..."
       - mkdir -p build
-      - cp -r app.js server.js utils.js package.json node_modules scripts appspec.yml build/
+      - cp -r app.js server.js utils.js package.json node_modules build/
+      - cp appspec.yml build/
+      - cp -r scripts build/
 
   post_build:
     commands:
       - echo "Zip paketi hazırlanıyor..."
-      - zip -r ../marketforge-artifact.zip build appspec.yml scripts/
+      - cd build
+      - zip -r ../marketforge-artifact.zip .
 
 artifacts:
   files:
