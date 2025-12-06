@@ -6,13 +6,13 @@ echo "🚀 Uygulama başlatılıyor..."
 APP_DIR="/home/ubuntu/marketforge"
 cd $APP_DIR
 
-# 🟢 NVM Ortamını Yükle (Kurulum BeforeInstall'da yapıldı)
+# 🟢 NVM Ortamını Yükle 
 export NVM_DIR="/home/ubuntu/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" 
 
 # 💥 KRİTİK DÜZELTME: NPM çakışmasını temizle
-# Hata mesajında belirtilen komutu uygulayın.
-# Bu komut, .npmrc dosyasındaki prefix/globalconfig ayarını kaldırır.
+# Hata mesajında belirtilen işlemi yapar: .npmrc dosyasındaki prefix/globalconfig ayarını kaldırır.
+# "stable" yerine loglarda gördüğünüz v25.2.1 gibi bir sürüm de kullanabilirsiniz.
 nvm use --delete-prefix stable 
 
 # Şimdi nvm use komutunu güvenle çalıştırın.
