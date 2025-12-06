@@ -6,18 +6,16 @@ echo "🚀 Uygulama başlatılıyor..."
 APP_DIR="/home/ubuntu/marketforge"
 cd $APP_DIR
 
-# 🟢 NVM Ortamını Yükle (Standart Yöntem)
-# NVM'in BeforeInstall'da kurulduğu varsayılır.
+# 🟢 NVM Ortamını Yükle (Kurulum BeforeInstall'da yapıldı)
 export NVM_DIR="/home/ubuntu/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" 
 
-# NVM'i çalıştırabilmek için kritik olan betiği source edin.
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+# 💥 KRİTİK DÜZELTME: NPM çakışmasını temizle
+# nvm use komutundan önce çakışan global ayarları kaldır.
+# nvm'in doğru Node sürümünü alabilmesi için bu gereklidir.
+nvm use --delete-prefix stable 
 
-# NVM'i kullan
 nvm use stable 
-
-# Node path düzeltmesi (Gerekliyse kalsın, ancak NVM'in yolunu bozabilir)
-# export NODE_PATH="/usr/local/lib/node_modules" 
 
 echo "🔍 Mevcut node versiyonu:"
 node -v || echo "Node bulunamadı!"
