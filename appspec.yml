@@ -7,10 +7,15 @@ files:
 
 hooks:
   BeforeInstall:
-    # 1. Sahipliği ayarla: npm'den önce çalışmalı.
+    # 1. Sahipliği ayarla
     - location: scripts/change_ownership.sh
       timeout: 300
       runas: root
+
+    # 💥 YENİ: node_modules klasörünü root olarak sil.
+    - location: scripts/remove_node_modules.sh
+      timeout: 300
+      runas: root # Bu, kesinlikle root yetkisiyle çalışmalı.
 
     # Mevcut before_install.sh betiğiniz (eğer varsa)
     # - location: scripts/before_install.sh
