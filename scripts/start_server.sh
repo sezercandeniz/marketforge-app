@@ -1,8 +1,14 @@
 #!/bin/bash
 set -e
 
+echo "🚀 Uygulama başlatılıyor..."
+
 cd /home/ubuntu/marketforge
 
-pm2 stop all || true
-pm2 start server.js
-pm2 save
+# Önce çalışan process varsa öldür
+pkill node || true
+
+echo "🌍 Server arka planda başlatılıyor..."
+nohup node server.js > app.log 2>&1 &
+
+echo "ApplicationStart tamamlandı."

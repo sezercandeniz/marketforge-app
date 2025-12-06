@@ -1,12 +1,11 @@
 #!/bin/bash
 set -e
 
-# Node 20 kurulumu
-curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-sudo apt install -y nodejs
+echo "📦 Proje klasörü temizleniyor..."
+rm -rf /home/ubuntu/marketforge
 
-# PM2 kurulumu
-sudo npm install -g pm2
+echo "📁 marketforge klasörü yeniden oluşturuluyor..."
+mkdir -p /home/ubuntu/marketforge
+chmod -R 755 /home/ubuntu/marketforge
 
-sudo mkdir -p /home/ubuntu/marketforge
-sudo chown ubuntu:ubuntu /home/ubuntu/marketforge
+echo "BeforeInstall tamamlandı."
