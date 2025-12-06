@@ -7,13 +7,19 @@ files:
 
 hooks:
   BeforeInstall:
+    # 💥 YENİ ADIM: Sahipliği 'ubuntu' kullanıcısına vermek için bu betiği ekliyoruz.
+    - location: scripts/change_ownership.sh
+      timeout: 300
+      runas: root # Bu komut root olarak çalışmalı ki sahipliği değiştirebilsin.
+
+    # Mevcut before_install.sh betiğiniz
     - location: scripts/before_install.sh
       timeout: 300
 
   AfterInstall:
     - location: scripts/after_install.sh
       timeout: 300
-      runas: ubuntu
+      runas: ubuntu # Artık bu adımda izin sorunu yaşamayız.
 
   ApplicationStart:
     - location: scripts/start_server.sh
