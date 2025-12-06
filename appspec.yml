@@ -7,28 +7,27 @@ files:
 
 hooks:
   BeforeInstall:
-    # 1. Sahipliği ayarla
+    # 💥 KRİTİK: NVM ve Node.js'i kurun. (Timeout süresini artırın)
+    - location: scripts/before_install.sh
+      timeout: 600
+      runas: root
+
+    # 1. Sahipliği ayarla (Kurulumdan sonra da NVM klasörlerini garantiye alın)
     - location: scripts/change_ownership.sh
       timeout: 300
       runas: root
 
-    # 💥 YENİ: node_modules klasörünü root olarak sil.
+    # 2. node_modules klasörünü root olarak sil.
     - location: scripts/remove_node_modules.sh
       timeout: 300
-      runas: root # Bu, kesinlikle root yetkisiyle çalışmalı.
-
-    # Mevcut before_install.sh betiğiniz (eğer varsa)
-    # - location: scripts/before_install.sh
-    #   timeout: 300
+      runas: root
 
   AfterInstall:
-    # 2. Kurulumu yap: Bu betik içindeki sudo ile çalışacak.
     - location: scripts/after_install.sh
       timeout: 300
-      runas: ubuntu # Bu kullanıcı sudo yetkisi kullanacak.
+      runas: ubuntu
 
   ApplicationStart:
-    # 3. Sunucuyu başlat: npm install burada OLMAMALI!
     - location: scripts/start_server.sh
       timeout: 300
       runas: ubuntu

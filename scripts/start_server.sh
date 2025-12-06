@@ -6,23 +6,18 @@ echo "🚀 Uygulama başlatılıyor..."
 APP_DIR="/home/ubuntu/marketforge"
 cd $APP_DIR
 
-# 🟢 KRİTİK DÜZELTME: NVM'i PATH'e Zorlama
+# 🟢 NVM Ortamını Yükle (Standart Yöntem)
+# NVM'in BeforeInstall'da kurulduğu varsayılır.
 export NVM_DIR="/home/ubuntu/.nvm"
 
-# NVM'i yükleyen betiği source edin.
+# NVM'i çalıştırabilmek için kritik olan betiği source edin.
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
-# CodeDeploy'un non-login kabuğunda Node.js'i PATH'e ekle.
-# Bu, nvm use stable komutunun yaptığı işi yapar.
-export NODE_VERSION=$(ls -d $NVM_DIR/versions/node/* | sort -V | tail -n 1)
-export PATH="$NODE_VERSION/bin:$PATH"
-
-# Node path düzeltmesi (artık NVM PATH'i kullanılacak)
-export NODE_PATH="/usr/local/lib/node_modules" 
-# PATH="$PATH:/usr/bin:/usr/local/bin:$NVM_DIR" satırına artık gerek yok.
-
-# NVM'i kullan (PATH zaten ayarlandığı için bu komut şimdi çalışabilir)
+# NVM'i kullan
 nvm use stable 
+
+# Node path düzeltmesi (Gerekliyse kalsın, ancak NVM'in yolunu bozabilir)
+# export NODE_PATH="/usr/local/lib/node_modules" 
 
 echo "🔍 Mevcut node versiyonu:"
 node -v || echo "Node bulunamadı!"
