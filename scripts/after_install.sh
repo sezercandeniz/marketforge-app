@@ -15,10 +15,12 @@ nvm use stable
 
 # 📦 Kurulumu SUDO ile yap (Önceki çözümümüz)
 echo "📦 npm install SUDO ile çalıştırılıyor..."
+# --unsafe-perm bayrağı sudo ile kurulumda gereklidir.
 sudo npm install --unsafe-perm
 
 # 🚨 Kurulumdan sonra, oluşan dosyaların sahipliğini geri alın!
 echo "🚨 Kurulum sonrası dosya sahipliği ubuntu'ya geri alınıyor..."
+# Bu komut SUDO ile çalışmalı çünkü kurulum root tarafından yapıldı.
 sudo chown -R ubuntu:ubuntu $APP_DIR
 
 echo "AfterInstall OK"
