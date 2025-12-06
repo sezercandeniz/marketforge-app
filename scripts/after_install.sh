@@ -7,22 +7,25 @@ cd $APP_DIR
 echo "📦 node_modules temizleniyor (SUDO ile)..."
 sudo rm -rf node_modules
 
-# 🟢 KRİTİK DÜZELTME: NVM'i PATH'e Zorlama
+# 🟢 NVM YÜKLEME VE KULLANMA ADIMLARI ATLANDI!
+# Bunun yerine, Node.js'in PATH'ini belirle.
 export NVM_DIR="/home/ubuntu/.nvm"
-# NVM'i PATH'e ekleyen betiği source edin.
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
-# PATH'e NVM'in ana dizinini ekleyin, nvm komutunu bulabilmek için.
-export PATH="$NVM_DIR/versions/node/$(nvm version)/bin:$PATH"
+# NVM'in yüklediği Node.js'in bin dizinini PATH'e ekleyerek 'npm' komutunu bul.
+# (Bu, nvm use stable komutunun yaptığı işi manuel yapar.)
+# NOT: Eğer EC2'nizde sadece bir Node versiyonu kuruluysa (örneğin v18.x.x), 
+# bu yolu manuel olarak ayarlamak daha kesin sonuç verir. 
+# Örnek: export PATH="$NVM_DIR/versions/node/v18.17.1/bin:$PATH"
 
-# NVM'i kullan
-nvm use stable 
+# Şimdilik en son kurulan NVM versiyonunu PATH'e ekleyelim:
+export NODE_VERSION=$(ls -d $NVM_DIR/versions/node/* | sort -V | tail -n 1)
+export PATH="$NODE_VERSION/bin:$PATH"
+
 
 # 📦 Kurulumu SUDO ile yap
 echo "📦 npm install SUDO ile çalıştırılıyor..."
-# Node'un NVM tarafından belirlenen tam yolunu kullanarak SUDO'yu çalıştırın.
-# Bu, SUDO'nun PATH'i sıfırlamasını engeller.
-sudo $NVM_DIR/versions/node/$(nvm version)/bin/npm install --unsafe-perm
+# SUDO, artık NVM'i aramak yerine, PATH'e eklediğimiz npm'i kullanacak.
+sudo npm install --unsafe-perm
 
 # 🚨 Kurulum sonrası sahiplik geri alınıyor
 echo "🚨 Kurulum sonrası dosya sahipliği ubuntu'ya geri alınıyor..."
