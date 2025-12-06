@@ -7,21 +7,23 @@ files:
 
 hooks:
   BeforeInstall:
-    # 💥 YENİ ADIM: Sahipliği 'ubuntu' kullanıcısına vermek için bu betiği ekliyoruz.
+    # 1. Sahipliği ayarla: npm'den önce çalışmalı.
     - location: scripts/change_ownership.sh
       timeout: 300
-      runas: root # Bu komut root olarak çalışmalı ki sahipliği değiştirebilsin.
+      runas: root
 
-    # Mevcut before_install.sh betiğiniz
-    - location: scripts/before_install.sh
-      timeout: 300
+    # Mevcut before_install.sh betiğiniz (eğer varsa)
+    # - location: scripts/before_install.sh
+    #   timeout: 300
 
   AfterInstall:
+    # 2. Kurulumu yap: Bu betik içindeki sudo ile çalışacak.
     - location: scripts/after_install.sh
       timeout: 300
-      runas: ubuntu # Artık bu adımda izin sorunu yaşamayız.
+      runas: ubuntu # Bu kullanıcı sudo yetkisi kullanacak.
 
   ApplicationStart:
+    # 3. Sunucuyu başlat: npm install burada OLMAMALI!
     - location: scripts/start_server.sh
       timeout: 300
       runas: ubuntu
